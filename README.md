@@ -1,6 +1,6 @@
 # 🤖 AI Futu Trader
 
-基于富途 OpenD + LLM 的智能量化交易系统，专注于美股 ETF 和期权交易。
+基于富途 OpenD + LLM 的智能量化交易系统，融合港大 [AI-Trader](https://github.com/HKUDS/AI-Trader) 核心架构，专注于美股 ETF 和期权交易。
 
 ![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
@@ -14,9 +14,16 @@
 - **全流程延迟**: ≤1s (行情 → 模型 → 下单)
 - 连接池复用、订单预编译优化
 
-### 🧠 LLM 驱动决策
+### 🧠 AI-Trader 核心 (港大 HKUDS)
+- **Chain-of-Thought (CoT) 推理**: 多步透明决策
+- **市场状态分析**: 牛市/熊市/高波动检测
+- **情绪分析**: 贪婪/恐惧指标
+- **不确定性量化**: 模型与数据不确定性分离
+- **自我反思学习**: 从历史交易持续优化
+
+### 🤖 LLM 驱动决策
 - 支持 GPT-4 Turbo 和 Claude 3.5 Sonnet
-- Chain-of-Thought 推理
+- EnhancedLLMAgent: 结合 LLM + CoT 推理
 - 技术指标 + AI 综合决策
 
 ### 📊 完善的风控

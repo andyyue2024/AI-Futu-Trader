@@ -494,3 +494,101 @@ class LLMAgent:
             "max_latency_ms": max(latencies),
             "min_latency_ms": min(latencies)
         }
+
+
+class EnhancedLLMAgent(LLMAgent):
+    """
+    Enhanced LLM Agent with full AI-Trader Core integration.
+    Combines LLM reasoning with technical analysis from AI-Trader Core.
+    """
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        from .ai_trader_core import get_ai_trader_core
+        self._ai_core = get_ai_trader_core()
+
+    def analyze_with_cot(
+        self,
+        snapshot,
+        current_position=None,
+        portfolio_value: float = 100000.0,
+        risk_budget: float = 0.02,
+    ) -> Tuple[TradingDecision, 'CoTReasoning']:
+        """
+        Enhanced analysis using Chain-of-Thought reasoning.
+
+        Returns both the trading decision and the full CoT reasoning.
+        """
+        # Get CoT reasoning from AI-Trader Core
+        cot_reasoning = self._ai_core.generate_cot_reasoning(snapshot, current_position)
+
+        # Get market regime
+        regime = self._ai_core.detect_market_regime(snapshot)
+
+        # Get sentiment
+        sentiment = self._ai_core.analyze_sentiment(snapshot)
+
+        # Estimate uncertainty
+        uncertainty = self._ai_core.estimate_uncertainty(snapshot, cot_reasoning.overall_confidence)
+
+        # Get LLM decision
+        decision = self.analyze(snapshot, current_position, portfolio_value, risk_budget)
+
+        # Enhance decision with AI-Trader Core insights
+        decision.reasoning = f"[{regime.value}] {decision.reasoning}"
+        decision.key_factors.append(f"regime:{regime.value}")
+        decision.key_factors.append(f"sentiment:{sentiment.level.value}")
+        decision.key_factors.append(f"uncertainty:{uncertainty.total:.2f}")
+
+        # Adjust confidence based on uncertainty
+        if uncertainty.total > 0.5:
+            decision.confidence_score *= 0.8
+
+        # If CoT and LLM disagree, be more conservative
+        cot_action = cot_reasoning.final_decision.lower()
+        llm_action = decision.action.value.lower()
+
+        if cot_action != llm_action and cot_action != "hold" and llm_action != "hold":
+            decision.confidence_score *= 0.7
+            decision.key_factors.append("cot_llm_disagreement")
+
+        return decision, cot_reasoning
+
+    def get_market_analysis(self, snapshot) -> Dict[str, Any]:
+        """Get comprehensive market analysis"""
+        regime = self._ai_core.detect_market_regime(snapshot)
+        sentiment = self._ai_core.analyze_sentiment(snapshot)
+        uncertainty = self._ai_core.estimate_uncertainty(snapshot, 0.5)
+
+        return {
+            "regime": regime.value,
+            "sentiment": {
+                "level": sentiment.level.value,
+                "score": sentiment.score,
+                "factors": sentiment.factors,
+                "is_extreme": sentiment.is_extreme
+            },
+            "uncertainty": {
+                "epistemic": uncertainty.epistemic,
+                "aleatoric": uncertainty.aleatoric,
+                "total": uncertainty.total
+            }
+        }
+
+    def self_reflect(self) -> Dict[str, Any]:
+        """Perform self-reflection on recent performance"""
+        recent_decisions = self.get_recent_decisions(20)
+
+        trades = []
+        for d in recent_decisions:
+            trades.append({
+                "symbol": d.symbol,
+                "action": d.action.value,
+                "pnl": 0,  # Would need actual P&L tracking
+                "hour": d.timestamp.hour
+            })
+
+        metrics = self.get_decision_stats()
+
+        return self._ai_core.self_reflect(trades, metrics)
+
