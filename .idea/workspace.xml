@@ -4,14 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="64fee91e-6f5e-4e25-a45b-d90d6d816e6a" name="Changes" comment="add real-time data fetching for portfolio, win rate, and Sharpe ratio in dashboard">
-      <change afterPath="$PROJECT_DIR$/src/model/ai_trader_core.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/unit/test_ai_trader_core.py" afterDir="false" />
+    <list default="true" id="64fee91e-6f5e-4e25-a45b-d90d6d816e6a" name="Changes" comment="add AI-Trader Core module with Chain-of-Thought reasoning, market analysis, and enhanced LLM integration">
+      <change afterPath="$PROJECT_DIR$/src/model/action_parser.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/model/memory.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/model/signal_aggregator.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/model/strategy_evaluator.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/unit/test_action_parser.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/unit/test_memory.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/unit/test_signal_aggregator.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/unit/test_strategy_evaluator.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/features.txt" beforeDir="false" afterPath="$PROJECT_DIR$/features.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/model/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/llm_agent.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/llm_agent.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -160,7 +165,15 @@
       <option name="project" value="LOCAL" />
       <updated>1769580901079</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="add AI-Trader Core module with Chain-of-Thought reasoning, market analysis, and enhanced LLM integration">
+      <option name="closed" value="true" />
+      <created>1769581796811</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1769581796811</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -183,7 +196,8 @@
     <MESSAGE value="add system dashboard module with real-time health and performance monitoring features" />
     <MESSAGE value="add enhanced dashboard with real-time system status, trading metrics, and compliance monitoring features" />
     <MESSAGE value="add real-time data fetching for portfolio, win rate, and Sharpe ratio in dashboard" />
-    <option name="LAST_COMMIT_MESSAGE" value="add real-time data fetching for portfolio, win rate, and Sharpe ratio in dashboard" />
+    <MESSAGE value="add AI-Trader Core module with Chain-of-Thought reasoning, market analysis, and enhanced LLM integration" />
+    <option name="LAST_COMMIT_MESSAGE" value="add AI-Trader Core module with Chain-of-Thought reasoning, market analysis, and enhanced LLM integration" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>

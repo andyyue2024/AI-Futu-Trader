@@ -74,9 +74,14 @@ AIFutuTrader/
 │   │   ├── futu_executor.py     # 订单执行
 │   │   ├── position_manager.py  # 持仓管理
 │   │   └── order_optimizer.py   # 订单优化器
-│   ├── model/                   # 模型模块
-│   │   ├── llm_agent.py         # LLM 决策
-│   │   └── prompts.py           # 提示词模板
+│   ├── model/                   # 模型模块 (港大 AI-Trader 框架)
+│   │   ├── llm_agent.py         # LLM 决策代理
+│   │   ├── prompts.py           # 提示词模板
+│   │   ├── ai_trader_core.py    # AI-Trader 核心 (CoT推理)
+│   │   ├── memory.py            # 交易记忆系统
+│   │   ├── action_parser.py     # 动作解析器
+│   │   ├── signal_aggregator.py # 信号聚合器
+│   │   └── strategy_evaluator.py # 策略评估器
 │   ├── risk/                    # 风控模块
 │   │   └── risk_manager.py      # 风险管理
 │   ├── monitor/                 # 监控模块
