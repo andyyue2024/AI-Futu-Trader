@@ -21,6 +21,14 @@ from .feishu_enhanced import (
     AlertCategory,
     FeishuCardBuilder,
 )
+from .performance import (
+    PerformanceMonitor,
+    ErrorTracker,
+    FunctionProfiler,
+    SystemMetrics,
+    PerformanceSnapshot,
+    get_performance_monitor,
+)
 
 __all__ = [
     "MetricsExporter",
@@ -37,4 +45,10 @@ __all__ = [
     "AlertPriority",
     "AlertCategory",
     "FeishuCardBuilder",
+    "PerformanceMonitor",
+    "ErrorTracker",
+    "FunctionProfiler",
+    "SystemMetrics",
+    "PerformanceSnapshot",
+    "get_performance_monitor",
 ]
