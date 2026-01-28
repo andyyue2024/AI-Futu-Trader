@@ -9,6 +9,11 @@ from .futu_executor import (
     TradingAction,
     Position,
 )
+from .position_manager import (
+    PositionManager,
+    ManagedPosition,
+    PositionEntry,
+)
 
 __all__ = [
     "FutuExecutor",
@@ -17,4 +22,7 @@ __all__ = [
     "OrderStatus",
     "TradingAction",
     "Position",
+    "PositionManager",
+    "ManagedPosition",
+    "PositionEntry",
 ]

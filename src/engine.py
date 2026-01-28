@@ -13,6 +13,9 @@ import sys
 from src.core.config import get_settings, Settings
 from src.core.logger import setup_logger, get_logger, PerformanceLogger
 from src.core.symbols import SymbolRegistry, get_symbol_registry, TradingSession
+from src.core.session_manager import SessionManager, get_session_manager, MarketSession
+from src.core.statistics import TradingStatistics, PerformanceMetrics
+from src.core.strategy_config import StrategyConfig
 
 from src.data.futu_quote import FutuQuoteClient, AsyncFutuQuoteClient, QuoteData, KLineData
 from src.data.data_processor import DataProcessor, MarketSnapshot
@@ -24,6 +27,7 @@ from src.action.futu_executor import (
     OrderResult,
     Position
 )
+from src.action.position_manager import PositionManager, ManagedPosition
 
 from src.model.llm_agent import LLMAgent, TradingDecision
 
@@ -122,6 +126,19 @@ class TradingEngine:
             starting_equity=self.settings.default_position_size * 10,  # 10x position size as starting equity
             max_daily_drawdown=self.settings.max_daily_drawdown,
             max_total_drawdown=self.settings.max_total_drawdown
+        )
+
+        # Position Manager
+        self.position_manager = PositionManager(
+            starting_cash=self.settings.default_position_size * 10
+        )
+
+        # Session Manager
+        self.session_manager = get_session_manager()
+
+        # Trading Statistics
+        self.statistics = TradingStatistics(
+            starting_equity=self.settings.default_position_size * 10
         )
 
         # Monitoring

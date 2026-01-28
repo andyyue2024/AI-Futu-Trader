@@ -1,0 +1,123 @@
+# AI Futu Trader - Strategy Configuration Example
+# This file demonstrates the strategy configuration format
+
+name: "tqqq_momentum"
+version: "1.0.0"
+description: "Momentum strategy for TQQQ with LLM-based decisions"
+strategy_type: "llm_based"
+
+# Trading Symbols
+symbols:
+  - "US.TQQQ"
+  - "US.QQQ"
+
+# LLM Settings
+llm_provider: "openai"
+llm_model: "gpt-4-turbo-preview"
+llm_temperature: 0.1
+
+# Technical Indicators
+indicators:
+  - name: "rsi"
+    enabled: true
+    params:
+      period: 14
+    weight: 1.0
+    buy_threshold: 30.0
+    sell_threshold: 70.0
+
+  - name: "macd"
+    enabled: true
+    params:
+      fast: 12
+      slow: 26
+      signal: 9
+    weight: 1.0
+
+  - name: "bollinger"
+    enabled: true
+    params:
+      period: 20
+      std: 2
+    weight: 0.8
+
+  - name: "atr"
+    enabled: true
+    params:
+      period: 14
+    weight: 0.5
+
+  - name: "adx"
+    enabled: true
+    params:
+      period: 14
+    weight: 0.7
+
+# Risk Management
+risk:
+  # Position Sizing
+  position_size_method: "fixed"  # fixed, percent, volatility, kelly
+  fixed_position_size: 10000.0
+  position_size_pct: 0.10  # 10% of portfolio
+  max_position_pct: 0.25   # 25% max in single position
+
+  # Stop Loss
+  use_stop_loss: true
+  stop_loss_pct: 0.02  # 2%
+  stop_loss_atr_multiplier: 2.0
+  trailing_stop: false
+  trailing_stop_pct: 0.015
+
+  # Take Profit
+  use_take_profit: true
+  take_profit_pct: 0.04  # 4%
+  take_profit_atr_multiplier: 3.0
+
+  # Circuit Breakers
+  max_daily_drawdown: 0.03   # 3%
+  max_total_drawdown: 0.15   # 15%
+  max_daily_trades: 50
+  max_daily_loss: 5000.0
+
+  # Time-based
+  max_holding_period_minutes: 480  # 8 hours
+  no_new_positions_before_close_minutes: 30
+
+# Entry Conditions
+entry:
+  min_confidence: 0.6
+  require_volume_confirmation: true
+  min_volume_ratio: 1.2
+  require_trend_alignment: true
+  trend_indicator: "sma_20"
+  require_momentum: true
+  min_rsi: 25.0
+  max_rsi: 75.0
+  max_spread_pct: 0.005  # 0.5%
+  allowed_sessions:
+    - "regular"
+    - "pre_market"
+    - "after_hours"
+
+# Exit Conditions
+exit:
+  partial_profit_levels:
+    - pct: 0.02  # At 2% profit
+      close_pct: 0.5  # Close 50%
+    - pct: 0.04  # At 4% profit
+      close_pct: 0.5  # Close remaining
+  exit_before_close: true
+  exit_before_close_minutes: 15
+  exit_on_signal_reversal: true
+  exit_on_momentum_loss: true
+  exit_on_volatility_spike: true
+  volatility_spike_multiplier: 2.0
+
+# Execution
+order_type: "market"  # market, limit, adaptive
+limit_offset_pct: 0.001
+max_slippage_pct: 0.002  # 0.2%
+
+# Scheduling
+trading_interval_seconds: 60  # 1 minute
+rebalance_interval_minutes: 0  # 0 = no rebalancing

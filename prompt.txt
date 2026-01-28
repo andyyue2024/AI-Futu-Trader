@@ -11,7 +11,7 @@ https://github.com/HKUDS/AI-Trader.git
 4.
 代码 Docker 化，Git-flow + 单元测试≥80%；监控Grafana，异常 5 分钟飞书叫醒。
 5.
-跑稳 TQQQ/QQQ 后，1天内部署到 SPXL、SOXL、AAPL、期权等任意美股标的，零改动。
+跑稳 TQQQ/QQQ 后，零改动内部署到 SPXL、SOXL、AAPL、期权等任意美股标的。
 
 输出：
 1.结构完整、可运行的程序
