@@ -330,6 +330,26 @@ def cmd_web(args):
     return 0
 
 
+def cmd_dashboard(args):
+    """Dashboard command"""
+    from src.monitor.dashboard import get_dashboard
+
+    dashboard = get_dashboard()
+    dashboard.print_dashboard()
+
+    return 0
+
+
+def cmd_compliance(args):
+    """Check target compliance"""
+    from src.monitor.dashboard import get_dashboard
+
+    dashboard = get_dashboard()
+    print(dashboard.get_compliance_summary())
+
+    return 0
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="AI Futu Trader CLI Tools",
@@ -345,6 +365,14 @@ def main():
     # Status command
     status_parser = subparsers.add_parser("status", help="System status")
     status_parser.set_defaults(func=cmd_status)
+
+    # Dashboard command
+    dashboard_parser = subparsers.add_parser("dashboard", help="System dashboard")
+    dashboard_parser.set_defaults(func=cmd_dashboard)
+
+    # Compliance command
+    compliance_parser = subparsers.add_parser("compliance", help="Target compliance check")
+    compliance_parser.set_defaults(func=cmd_compliance)
 
     # Symbols command
     symbols_parser = subparsers.add_parser("symbols", help="List and manage symbols")

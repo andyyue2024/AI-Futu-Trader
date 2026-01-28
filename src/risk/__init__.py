@@ -8,6 +8,21 @@ from .risk_manager import (
     CircuitBreaker,
     PositionSizer,
 )
+from .slippage_controller import (
+    SlippageController,
+    SlippageRecord,
+    SlippageStats,
+    FillRateMonitor,
+    VolumeTracker,
+    get_slippage_controller,
+    get_fill_rate_monitor,
+    get_volume_tracker,
+)
+from .sharpe_calculator import (
+    SharpeCalculator,
+    RiskMetrics,
+    get_sharpe_calculator,
+)
 
 __all__ = [
     "RiskManager",
@@ -15,4 +30,15 @@ __all__ = [
     "RiskAlert",
     "CircuitBreaker",
     "PositionSizer",
+    "SlippageController",
+    "SlippageRecord",
+    "SlippageStats",
+    "FillRateMonitor",
+    "VolumeTracker",
+    "get_slippage_controller",
+    "get_fill_rate_monitor",
+    "get_volume_tracker",
+    "SharpeCalculator",
+    "RiskMetrics",
+    "get_sharpe_calculator",
 ]

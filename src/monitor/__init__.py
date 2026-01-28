@@ -29,6 +29,13 @@ from .performance import (
     PerformanceSnapshot,
     get_performance_monitor,
 )
+from .dashboard import (
+    SystemDashboard,
+    DashboardData,
+    TargetCompliance,
+    HealthStatus,
+    get_dashboard,
+)
 
 __all__ = [
     "MetricsExporter",
@@ -51,4 +58,9 @@ __all__ = [
     "SystemMetrics",
     "PerformanceSnapshot",
     "get_performance_monitor",
+    "SystemDashboard",
+    "DashboardData",
+    "TargetCompliance",
+    "HealthStatus",
+    "get_dashboard",
 ]
